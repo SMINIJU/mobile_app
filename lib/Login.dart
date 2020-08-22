@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:mobile_app/customfile.dart';
+import 'package:mobile_app/homePage.dart';
+
 class login extends StatefulWidget {
   @override
   _loginState createState() => _loginState();
@@ -40,53 +43,101 @@ class _loginState extends State<login> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         color: Colors.blue,
-        child: Center(
-            child: Container(
-          width: 400,
-          height: 400,
-//           color: Colors.red,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                  width: 300,
-                  child: Material(
-                    elevation: 5.0,
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                    color: Colors.deepOrange,
-                      child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Padding(
-                        padding:const EdgeInsets.all(8.0),
-                        child:Icon(Icons.person,color: Colors.grey),
-                      ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(topRight: Radius.circular(10.0),bottomRight: Radius.circular(10.0))
-                    ),
-                      width: 250,
-                    child:Padding(
-                      padding:const EdgeInsets.all(8.0),
+        child: Stack(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.bottomRight,
+              widthFactor: 0.6,
+              heightFactor: 0.6,
+              child: Material(
+                borderRadius: BorderRadius.all(Radius.circular(200.0)),
+                color: Color.fromRGBO(255, 255, 255, 0.4),
+                child: Container(
+                  width: 400,
+                  height: 400,
+                ),
 
-                    child: TextField(
-                      decoration: InputDecoration(
-                       // border: OutlineInputBorder(borderSide: BorderSide(color: Colors.deepOrange)),
-                        border: InputBorder.none,
-                          hintText: "Enter Username",
-                          fillColor: Colors.white, filled: true),
-                      style: TextStyle(fontSize: 15, color: Colors.red),
-                   ),
-          )
-                    )
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              widthFactor: 0.3,
+              heightFactor: 0.2,
+
+                child: Center(
+                  child: Material(
+                    borderRadius: BorderRadius.all(Radius.circular(150.0)),
+                    color: Color.fromRGBO(256, 253, 223, 0.4),
+                    child: Container(
+                    width: 300,
+                    height: 300,
+
+
+                  ),
+
+
+                ),
+              ),
+            ),
+
+
+
+            Center(
+                child: Container(
+                  width: 400,
+                  height: 400,
+//           color: Colors.red,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Material(
+                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                          child:Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:Image.asset('images/ex.png',width: 60,height: 60,),
+                          )),
+                      custom(
+                        validate: (user) => user.isEmpty ? "Please Enter username" : null,
+                          fieldicon: Icon(
+                            Icons.person,
+                            color: Colors.white,
+                          ),
+                          user: "Username"),
+                      custom(
+                          validate: (pwd)=> pwd.isEmpty ? "Please Enter username" : null,
+                          fieldicon: Icon(
+                            Icons.lock,
+                            color: Colors.white,
+                          ),
+
+                          user: "Password"),
+                      Container(
+                        width: 150,
+                        height: 50,
+                        child: RaisedButton(
+                          onPressed: () {
+                            if(_formkey.currentState.validate()  ){
+                               Homescreen();
+                            }
+                          },
+                          color: Colors.deepOrange,
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide.none,
+                              borderRadius: BorderRadius.circular(10.0)),
+                          child: Text(
+                            "Login",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                        ),
+                      )
+
                     ],
-                  )
-                  )
-              )
-            ],
-          ),
-        )),
+                  ),
+                )
+            ),
+
+          ],
+        ),
       ),
     );
   }
