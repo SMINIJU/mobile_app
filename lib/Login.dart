@@ -36,13 +36,19 @@ class _loginState extends State<login> {
 
     return userdata;
   }
+  Future validation() async{
+    if (_formkey.currentState.validate())
+    {
+      Homescreen();
+    }
 
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: Colors.blue,
+        color: Colors.blue ,
         child: Stack(
           children: <Widget>[
             Align(
@@ -50,8 +56,8 @@ class _loginState extends State<login> {
               widthFactor: 0.6,
               heightFactor: 0.6,
               child: Material(
-                borderRadius: BorderRadius.all(Radius.circular(200.0)),
-                color: Color.fromRGBO(255, 255, 255, 0.4),
+               borderRadius: BorderRadius.all(Radius.circular(200.0)),
+                color: Color.fromRGBO(225, 255, 255, 0.4),
                 child: Container(
                   width: 400,
                   height: 400,
@@ -62,8 +68,7 @@ class _loginState extends State<login> {
             Align(
               alignment: Alignment.topRight,
               widthFactor: 0.3,
-              heightFactor: 0.2,
-
+               heightFactor: 0.2,
                 child: Center(
                   child: Material(
                     borderRadius: BorderRadius.all(Radius.circular(150.0)),
@@ -79,9 +84,6 @@ class _loginState extends State<login> {
                 ),
               ),
             ),
-
-
-
             Center(
                 child: Container(
                   width: 400,
@@ -97,28 +99,28 @@ class _loginState extends State<login> {
                             child:Image.asset('images/ex.png',width: 60,height: 60,),
                           )),
                       custom(
-                        validate: (user) => user.isEmpty ? "Please Enter username" : null,
+//                        validate: (user) => user.isEmpty ? "Please Enter username" : null,
                           fieldicon: Icon(
                             Icons.person,
                             color: Colors.white,
                           ),
-                          user: "Username"),
+                          user: "Username",
+                          pass: false),
                       custom(
-                          validate: (pwd)=> pwd.isEmpty ? "Please Enter username" : null,
+//                          validate: (pwd)=> pwd.isEmpty ? "Please Enter username" : null,
                           fieldicon: Icon(
                             Icons.lock,
-                            color: Colors.white,
+                            color: Colors.white
                           ),
-
-                          user: "Password"),
+                          user: "Password",
+                        pass: true
+                      ),
                       Container(
                         width: 150,
                         height: 50,
                         child: RaisedButton(
                           onPressed: () {
-                            if(_formkey.currentState.validate()  ){
-                               Homescreen();
-                            }
+                            validation();
                           },
                           color: Colors.deepOrange,
                           shape: RoundedRectangleBorder(

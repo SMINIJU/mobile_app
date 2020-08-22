@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_app/homePage.dart';
 class custom extends StatelessWidget {
   Icon fieldicon;
   String user;
-  Function validate;
-  custom({this.fieldicon,this.user,this.validate});
+//  Function validate;
+  bool pass;
+  custom({this.fieldicon,this.user,this.pass});
 
+ /* final _formkey = GlobalKey<FormState>();
+
+   Future validation() async{
+    if (_formkey.currentState.validate())
+{
+  Homescreen();
+}
+
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +43,7 @@ class custom extends StatelessWidget {
                       padding:const EdgeInsets.all(8.0),
 
                       child: TextFormField(
+                        obscureText: pass,
 //                        autovalidate: true,
                         decoration: InputDecoration(
                           // border: OutlineInputBorder(borderSide: BorderSide(color: Colors.deepOrange)),
@@ -39,10 +51,8 @@ class custom extends StatelessWidget {
                             hintText: user,
                             fillColor: Colors.white, filled: true,
 
-
-
                         ),
-                       validator: validate,
+                       validator: (val) => val.isEmpty ? "Enter"+ user: null,
                         style: TextStyle(fontSize: 20, color: Colors.black),
                       ),
                     )
